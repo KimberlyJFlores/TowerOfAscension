@@ -6,11 +6,11 @@ public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] Player playerCreature; //gets access to the Creature script
     SpriteRenderer sr;
-    // ProjectileThrower projectileThrower;
+    ProjectileThrower projectileThrower;
 
     void Start()
     {
-        // projectileThrower = playerCreature.GetComponent<ProjectileThrower>();
+        projectileThrower = playerCreature.GetComponent<ProjectileThrower>();
     }
 
     // Update is called once per frame
@@ -31,10 +31,11 @@ public class PlayerInputHandler : MonoBehaviour
         {
             playerCreature.Jump();
         }
-
         if(Input.GetKeyDown(KeyCode.E))
         {
-            // projectileThrower.Launch(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            playerCreature.GetComponents<AudioSource>()[4].Play();
+            projectileThrower.Launch(playerCreature.faceRight);
+            
         }
         playerCreature.MoveCreatureTransform(input);
     }

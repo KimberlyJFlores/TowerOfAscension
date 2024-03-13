@@ -10,7 +10,7 @@ public class SmoothFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 desiredPosition = target.position +offset;
+        Vector3 desiredPosition = target.position + offset;
         transform.position = Vector3.Lerp(
                                         transform.position,
                                         new Vector3(transform.position.x,desiredPosition.y,transform.position.z),

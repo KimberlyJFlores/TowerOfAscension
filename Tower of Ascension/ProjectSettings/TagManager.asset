@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Score
+  - Destructable
+  - Blockable
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - Player
   - Platform
   - Background
-  - 
+  - Score
   - 
   - 
   - 
@@ -40,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2490772271
+    locked: 0
+  - name: Platform
+    uniqueID: 563187971
+    locked: 0
+  - name: Player
+    uniqueID: 698294839
+    locked: 0
+  - name: Score
+    uniqueID: 3464770957
     locked: 0
