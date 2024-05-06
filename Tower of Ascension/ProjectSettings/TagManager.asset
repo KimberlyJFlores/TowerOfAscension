@@ -7,6 +7,7 @@ TagManager:
   - Score
   - Destructable
   - Blockable
+  - MenuCanvas
   layers:
   - Default
   - TransparentFX
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Score
     uniqueID: 3464770957
+    locked: 0
+  - name: Menu
+    uniqueID: 106399141
     locked: 0

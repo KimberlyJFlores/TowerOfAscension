@@ -8,6 +8,8 @@ public class PlayerInputHandler : MonoBehaviour
     SpriteRenderer sr;
     ProjectileThrower projectileThrower;
 
+    [SerializeField] MenuHandler pauseMenu;
+
     void Start()
     {
         projectileThrower = playerCreature.GetComponent<ProjectileThrower>();
@@ -36,6 +38,20 @@ public class PlayerInputHandler : MonoBehaviour
             playerCreature.GetComponents<AudioSource>()[4].Play();
             projectileThrower.Launch(playerCreature.faceRight);
             
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if( Time.timeScale == 0 )
+            {
+                Time.timeScale = 1;
+                pauseMenu.HidePauseMenu();
+            }
+            else if( Time.timeScale == 1 )
+            {
+                Time.timeScale = 0;
+                pauseMenu.ShowPauseMenu();
+            }
+
         }
         playerCreature.MoveCreatureTransform(input);
     }
