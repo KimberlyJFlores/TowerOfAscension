@@ -9,11 +9,11 @@ public class ShadowBall : MonoBehaviour
     {
         if(other.gameObject.tag == "Player"){ // destroy enemies
             player.Hurt();
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
         else if(other.gameObject.tag == "Blockable") // stop projectile from going through platforms
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -18,11 +18,15 @@ public class Player : MonoBehaviour
     [SerializeField] private List<AnimationStateChanger> animationStateChangers;
     AudioSource[] soundEffects;
 
+    [SerializeField] ContactFilter2D colFilter;
+    Collider2D col;
+
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         soundEffects = GetComponents<AudioSource>();
     }
 
@@ -62,8 +66,10 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if(Physics2D.OverlapCircleAll(transform.position + new Vector3(0,jumpOffset,0),jumpRadius,platformMask).Length > 0)
+        var results = new Collider2D[5];
+        if(Physics2D.OverlapCollider(col, colFilter, results) > 0)
         {
+            
             soundEffects[0].Play(); // jump
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -91,6 +97,11 @@ public class Player : MonoBehaviour
             heartDisplay[heartDisplayIdx].gameObject.GetComponent<Renderer>().enabled = false; // hide heart
             GameObject.Find("GameOverHandler").GetComponent<GameOverHandler>().showGameOver(); // show game over
         }
+    }
+
+    public void Teleport(Vector3 teleportTo)
+    {
+        this.transform.position = teleportTo;
     }
 
 }

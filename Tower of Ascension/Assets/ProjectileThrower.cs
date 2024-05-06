@@ -6,19 +6,44 @@ public class ProjectileThrower : MonoBehaviour
 {
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float speed = 5;
+    [SerializeField] int poolSize;
+    List<GameObject> pool = new List<GameObject>();
+
+    void Start()
+    {
+        for(int i = 0; i < poolSize; i++)
+        {
+            GameObject newFireball = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            newFireball.SetActive(false);
+            pool.Add(newFireball);
+        }
+    }
 
     public void Launch(bool faceRight)
     {
-        GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        if(faceRight)
+        foreach(GameObject fireball in pool)
         {
-            newProjectile.GetComponent<Rigidbody2D>().velocity = newProjectile.transform.right * speed;
+            if( fireball.activeSelf ) continue;
+            fireball.transform.position = transform.position;
+            fireball.SetActive(true);
+
+            if(faceRight)
+            {
+                fireball.GetComponent<Rigidbody2D>().velocity = fireball.transform.right * speed;
+            }
+            else // facing left, flipping sprite
+            {
+                fireball.GetComponent<Rigidbody2D>().velocity = -fireball.transform.right * speed;
+                fireball.GetComponent<Rigidbody2D>().transform.localScale = new Vector3(-1,1,1);
+            }
+            StartCoroutine(FireballPoolRoutine(fireball));
+            break;
         }
-        else // facing left, flipping sprite
-        {
-            newProjectile.GetComponent<Rigidbody2D>().velocity = -newProjectile.transform.right * speed;
-            newProjectile.GetComponent<Rigidbody2D>().transform.localScale = new Vector3(-1,1,1);
-        }
-        Destroy(newProjectile,15);
+    }
+
+    private IEnumerator FireballPoolRoutine( GameObject fireball )
+    {
+        yield return new WaitForSeconds(15);
+        fireball.SetActive(false);
     }
 }

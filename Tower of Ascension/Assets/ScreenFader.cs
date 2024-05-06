@@ -19,7 +19,7 @@ public class ScreenFader : MonoBehaviour
 
     }
 
-    void FadeToClear(){
+    public void FadeToClear(){
         fadeImage.color = fadeColor;
         StartCoroutine(FadeToClearRoutine());
         IEnumerator FadeToClearRoutine(){

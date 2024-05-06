@@ -9,11 +9,11 @@ public class Fireball : MonoBehaviour
     {
         if(other.gameObject.tag == "Destructable"){ // destroy enemies
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
         else if(other.gameObject.tag == "Blockable") // stop projectile from going through platforms
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
